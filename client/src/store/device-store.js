@@ -2,66 +2,16 @@ import { makeAutoObservable } from 'mobx';
 
 export default class DeviceStore {
     constructor() {
-        this._types = [
-            { id: 1, name: 'Холодильники' },
-            { id: 2, name: 'Смартфоны' },
-            { id: 3, name: 'Ноутбуки' },
-            { id: 4, name: 'Телевизоры' },
-        ];
+        this._types = [];
 
-        this._brands = [
-            { id: 1, name: 'Samsung' },
-            { id: 2, name: 'Apple' },
-            { id: 3, name: 'Lenovo' },
-            { id: 4, name: 'Asus' },
-        ];
+        this._brands = [];
 
-        this._devices = [
-            {
-                id: 1,
-                name: 'iPhone 18 pro max',
-                price: 250000,
-                rating: 5,
-                img: 'https://cdn.mtscdn.ru/upload/iblock/1b5/iphone_18_pro_black_NEW.png/resize/1688x732/',
-            },
-            {
-                id: 2,
-                name: 'iPhone 18 pro max',
-                price: 250000,
-                rating: 5,
-                img: 'https://cdn.mtscdn.ru/upload/iblock/2f5/iphone_18_pro_max_burgundy-4_2_Photoroom.png/resize/1688x732/',
-            },
-            {
-                id: 3,
-                name: 'iPhone 18 pro max',
-                price: 250000,
-                rating: 5,
-                img: 'https://cdn.mtscdn.ru/upload/iblock/b24/iphone_18_pro_max_glacier-4_2_Photoroom.png/resize/1688x732/',
-            },
-            {
-                id: 4,
-                name: 'iPhone 18 pro max',
-                price: 250000,
-                rating: 5,
-                img: 'https://cdn.mtscdn.ru/upload/iblock/cb1/iphone_18_pro_max_silver-4_Photoroom.png/resize/1688x732/',
-            },
-            {
-                id: 5,
-                name: 'iPhone 18 pro max',
-                price: 250000,
-                rating: 5,
-                img: 'https://cdn.mtscdn.ru/upload/iblock/1b5/iphone_18_pro_black_NEW.png/resize/1688x732/',
-            },
-            {
-                id: 6,
-                name: 'iPhone 18 pro max',
-                price: 250000,
-                rating: 5,
-                img: 'https://cdn.mtscdn.ru/upload/iblock/1b5/iphone_18_pro_black_NEW.png/resize/1688x732/',
-            },
-        ];
+        this._devices = [];
         this._selectedType = {};
         this._selectedBrand = {};
+        this._page = 1;
+        this._totalCount = 0;
+        this._limit = 3;
         makeAutoObservable(this);
     }
 
@@ -78,10 +28,21 @@ export default class DeviceStore {
     }
 
     setSelectedType(type) {
+        this.setPage(1);
         this._selectedType = type;
     }
+
     setSelectedBrand(brand) {
+        this.setPage(1);
         this._selectedBrand = brand;
+    }
+
+    setPage(page) {
+        this._page = page;
+    }
+
+    setTotalCount(totalCount) {
+        this._totalCount = totalCount;
     }
 
     get types() {
@@ -100,5 +61,14 @@ export default class DeviceStore {
     }
     get selectedBrand() {
         return this._selectedBrand;
+    }
+    get totalCount() {
+        return this._totalCount;
+    }
+    get page() {
+        return this._page;
+    }
+    get limit() {
+        return this._limit;
     }
 }

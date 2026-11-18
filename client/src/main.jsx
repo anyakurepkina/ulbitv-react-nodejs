@@ -1,11 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { createContext, StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css';
 import DeviceStore from './store/device-store';
 import UserStore from './store/user-store';
 
 export const Context = createContext(null);
+console.log(import.meta.env.VITE_API_URL);
 
 ReactDOM.render(
     <Context.Provider
